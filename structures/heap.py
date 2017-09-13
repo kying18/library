@@ -2,7 +2,6 @@
 # TODO: write tests for data structure
 class Heap(object):
     def __init__(self, max_heap=True):
-        super(Heap, self).__init__()
         self.data = []
         less_than = lambda x, y: x < y
         greater_than = lambda x, y: x > y
