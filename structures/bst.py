@@ -90,17 +90,20 @@ class BinarySearchTree(object):
         :return: None
         """
         def _add_element(node, value):
+            # go left if smaller than node value
             if value <= node.value:
                 if node.left:
                     _add_element(node.left, value)
                 else:
                     node.left = self.TreeNode(value, parent=node)
 
+            # go right if larger than node value
             elif value > node.value:
                 if node.right:
                     _add_element(node.right, value)
                 else:
                     node.right = self.TreeNode(value, parent=node)
+                    
         _add_element(self.root, value)
 
     @staticmethod

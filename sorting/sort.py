@@ -141,14 +141,22 @@ def radix_sort(data_list):
     pass
 
 def bst_sort(data_list):
+    """
+    Sort a list using sorting with bst
+    :param data_list: list of elements to sort
+    :return: sorted list of elements from least to greatest
+    """
     sorted_list = []
+    # if empty list, return empty list
     if not data_list:
         return sorted_list
 
+    # create binary tree of all elements
     bst = BinarySearchTree(data_list[0])
     for element in data_list[1:]:
         bst.add_element(element)
 
+    # find smallest and successors to sort
     node = bst.find_smallest()
     while node:
         sorted_list.append(node.value)
