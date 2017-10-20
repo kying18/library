@@ -108,10 +108,18 @@ def insertion_sort(data_list):
     return data_list
 
 def heap_sort(data_list):
+    """
+    Sort a list using heap sort (create a heap and sort by popping the min/max element)
+    :param data_list: list of elements to sort
+    :return: sorted list of elements from least to greatest
+    """
+    sorted_list = []
     heap = Heap(max_heap=False)
     for element in data_list:
         heap.add_element(element)
-    # TODO: implement rest of heapsort
+    while len(heap.data) > 0:
+        sorted_list.append(heap.pop())
+    return sorted_list
 
 def counting_sort(data_list):
     counts = {}
