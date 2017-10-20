@@ -1,4 +1,5 @@
 from structures.heap import Heap
+from structures.bst import BinarySearchTree
 
 def merge_sort(data_list):
     """
@@ -139,6 +140,22 @@ def counting_sort(data_list):
 def radix_sort(data_list):
     pass
 
+def bst_sort(data_list):
+    sorted_list = []
+    if not data_list:
+        return sorted_list
+
+    bst = BinarySearchTree(data_list[0])
+    for element in data_list[1:]:
+        bst.add_element(element)
+
+    node = bst.find_smallest()
+    while node:
+        sorted_list.append(node.value)
+        node = bst.find_successor(node)
+
+    return sorted_list
+
 if __name__ == '__main__':
-    _list = [3, 2, 1]
-    print(heap_sort(_list))
+    _list = [7, 8, 3, 5, 5]
+    print(bst_sort(_list))

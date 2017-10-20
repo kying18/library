@@ -192,6 +192,44 @@ def test_heap_sort_empty():
     assert (output == expected), "Got: {}; Expected: {}".format(output, expected)
 
 
+# bst sort
+def test_bst_sort_sorted_even():
+    data = [1, 2, 3, 4]
+    expected = [1, 2, 3, 4]
+    output = sort.bst_sort(data)
+    assert (output == expected), "Got: {}; Expected: {}".format(output, expected)
+
+def test_bst_sort_sorted_odd():
+    data = [1, 2, 3]
+    expected = [1, 2, 3]
+    output = sort.bst_sort(data)
+    assert (output == expected), "Got: {}; Expected: {}".format(output, expected)
+
+def test_bst_sort_unsorted_even():
+    data = [4, 2, 6, 1]
+    expected = [1, 2, 4, 6]
+    output = sort.bst_sort(data)
+    assert (output == expected), "Got: {}; Expected: {}".format(output, expected)
+
+def test_bst_sort_unsorted_odd():
+    data = [7, 8, 3, 5, 5]
+    expected = [3, 5, 5, 7, 8]
+    output = sort.bst_sort(data)
+    assert (output == expected), "Got: {}; Expected: {}".format(output, expected)
+
+def test_bst_sort_single():
+    data = [-1]
+    expected = [-1]
+    output = sort.bst_sort(data)
+    assert (output == expected), "Got: {}; Expected: {}".format(output, expected)
+
+def test_bst_sort_empty():
+    data = []
+    expected = []
+    output = sort.bst_sort(data)
+    assert (output == expected), "Got: {}; Expected: {}".format(output, expected)
+
+
 if __name__ == '__main__':
     test_merge_sort_sorted_even()
     test_merge_sort_sorted_odd()
@@ -227,3 +265,10 @@ if __name__ == '__main__':
     test_heap_sort_unsorted_odd()
     test_heap_sort_single()
     test_heap_sort_empty()
+
+    test_bst_sort_sorted_even()
+    test_bst_sort_sorted_odd()
+    test_bst_sort_unsorted_even()
+    test_bst_sort_unsorted_odd()
+    test_bst_sort_single()
+    test_bst_sort_empty()
