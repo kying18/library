@@ -103,7 +103,7 @@ class BinarySearchTree(object):
                     _add_element(node.right, value)
                 else:
                     node.right = self.TreeNode(value, parent=node)
-                    
+
         _add_element(self.root, value)
 
     @staticmethod
