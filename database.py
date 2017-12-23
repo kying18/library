@@ -1,4 +1,12 @@
 import pymysql
+import re
+
+def prevent_sql_injection(string):
+    string = re.sub('\"', '\\"', string)
+    string = re.sub("\'", "\\'", string)
+    string = re.sub('\%', '\\%', string)
+    string = re.sub('\_', '\\_', string)
+    return string
 
 def query(connection, sql, commit=True, results=True):
     """
@@ -12,29 +20,31 @@ def query(connection, sql, commit=True, results=True):
     :param results: boolean representing whether to show results
     :return: results if results true as a list of dictionaries given the appropriate sql command
     """
-    try:
-        with connection.cursor() as cursor:
-            # Create a new record
-            cursor.execute(sql)
+    with connection.cursor() as cursor:
+        # Create a new record
+        cursor.execute(sql)
 
-        # connection is not autocommit by default. So you must commit to save
-        # your changes.
-        if commit:
-            connection.commit()
+    # connection is not autocommit by default. So you must commit to save
+    # your changes.
+    if commit:
+        connection.commit()
 
-        if results:
-            results = cursor.fetchall()
-            return results
-    finally:
-        connection.close()
+    if results:
+        results = cursor.fetchall()
+        return results
+
+def close_connection(connection):
+    connection.close()
 
 if __name__ == '__main__':
-    connection = pymysql.connect(host='localhost',
-                                 user='',
-                                 password='',
-                                 db='sys',
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor)
+    print(prevent_sql_injection('"hi"'))
+    print(prevent_sql_injection("'hi'"))
+    # connection = pymysql.connect(host='localhost',
+    #                              user='',
+    #                              password='',
+    #                              db='sys',
+    #                              charset='utf8mb4',
+    #                              cursorclass=pymysql.cursors.DictCursor)
     # sql = "CALL sys.InsertPost('python test', 'confessions');"
-    sql = "SELECT * from sys.FacebookPosts;"
-    print(query(connection, sql))
+    # sql = "SELECT * from sys.FacebookPosts;"
+    # print(query(connection, sql))
